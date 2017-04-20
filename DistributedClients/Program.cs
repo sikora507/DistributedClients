@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Hosting;
+using System;
+using System.IO;
 
 namespace DistributedClients
 {
@@ -6,7 +8,16 @@ namespace DistributedClients
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Started Distributed Clents");
+
+            var host = new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseKestrel()
+                .UseStartup<Startup>()
+                .UseUrls("http://0.0.0.0:5000")
+                .Build();
+
+            host.Run();
         }
     }
 }
