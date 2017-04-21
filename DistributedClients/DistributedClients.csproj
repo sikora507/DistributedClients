@@ -16,7 +16,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\dist\css\" />
   </ItemGroup>
 
 </Project>

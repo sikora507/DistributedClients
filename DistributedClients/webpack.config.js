@@ -4,10 +4,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  entry: './wwwroot/app/main.js',
+  entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, './wwwroot/dist'),
-    publicPath: '/wwwroot/dist/',
+    publicPath: '/dist/',
     filename: 'build.js'
   },
   module: {
@@ -22,9 +22,14 @@ module.exports = {
         }
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        //test: /\.js$/,
+        test: /\.ts$/,
+        //loader: 'babel-loader',
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+            appendTsSuffixTo: [/\.vue$/]
+        }
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -41,12 +46,12 @@ module.exports = {
       },
       {
           test: /\.(woff2?|ttf|eot|svg)$/,
-          loader: 'url-loader?limit=10000'
+          loader: 'url-loader?limit=10000&name=./css/[hash].[ext]'
       }
     ]
   },
   plugins: [
-      new ExtractTextPlugin('styles.css'),
+      new ExtractTextPlugin('/css/styles.css'),
       new OptimizeCssAssetsPlugin({
           assetNameRegExp: /\.css$/g,
           cssProcessor: require('cssnano'),
