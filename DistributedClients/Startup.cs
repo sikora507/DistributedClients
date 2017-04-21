@@ -29,6 +29,11 @@ namespace DistributedClients
             app.UseMvc(route =>
             {
                 route.MapRoute(
+                    name: "api",
+                    template: "api/{controller}/{action}"
+                    );
+
+                route.MapRoute(
                     name: "default",
                     template: "{*anything}",
                     defaults: new { controller = "Home", action = "Index" });
