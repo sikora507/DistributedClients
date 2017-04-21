@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DistributedClients.WebSockets;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace DistributedClients
 {
@@ -20,11 +22,16 @@ namespace DistributedClients
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddWebSocketManager();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             app.UseDeveloperExceptionPage();
+
+            app.UseWebSockets();
+            app.MapWebSocketManager("/ws", serviceProvider.GetService<ChatMessageHandler>());
+
             app.UseStaticFiles();
             app.UseMvc(route =>
             {

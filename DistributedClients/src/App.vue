@@ -1,6 +1,12 @@
 <template>
     <div id="app">
         <Navbar name="Distributed Clients" :guid="instanceId"></Navbar>
+
+        <input type=text id="textInput" placeholder="Enter your text" />
+        <button id="sendButton">Send</button>
+
+        <ul id="messages"></ul>
+
         <img src="./assets/logo.png">
         <h1></h1>
         <h2>Essential Links</h2>
