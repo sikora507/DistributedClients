@@ -5,7 +5,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">{{name}}</a>
             </div>
-
+            <p class="navbar-text navbar-left">{{guid}}</p>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
@@ -23,7 +23,7 @@
                 greeting: 'Hello'
             }
         },
-        props: ['name']
+        props: ['name', 'guid']
     }
 </script>
 

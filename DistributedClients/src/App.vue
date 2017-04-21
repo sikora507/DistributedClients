@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Navbar name="Distributed Clients"></Navbar>
+        <Navbar name="Distributed Clients" :guid="instanceId"></Navbar>
         <img src="./assets/logo.png">
         <h1></h1>
         <h2>Essential Links</h2>
@@ -22,15 +22,23 @@
 
 <script lang="ts">
     import Navbar from './Navbar.vue'
+    import axios from 'axios'
+
     export default {
         name: 'app',
         data() {
             return {
-                msg: 'Welcome to Your Vue.js App'
+                msg: 'Welcome to Your Vue.js App',
+                instanceId: ''
             }
         },
         components: {
             Navbar
+        },
+        created() {
+            axios.get('/api/guid/getguid').then(response => {
+                this.instanceId = response.data
+            });
         }
     }
 </script>
